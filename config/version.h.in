@@ -1,0 +1,6 @@
+#ifndef HTS_VERSION_H
+#define HTS_VERSION_H
+
+#define HTS_VERSION "@VERSION@"
+
+#endif

@@ -128,6 +128,8 @@ target_link_libraries(htsfile
 	${ZLIB_LIBRARY}
 )
 
+add_dependencies(htsfile ${HTSLIB_EXTERNAL_PROJECT})
+add_dependencies(tabix ${HTSLIB_EXTERNAL_PROJECT})
 add_dependencies(bgzip ${HTSLIB_EXTERNAL_PROJECT})
 
 

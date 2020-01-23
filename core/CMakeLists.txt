@@ -62,6 +62,7 @@ set(HTSLIB_SOURCES
 	thread_pool.c
 	vcf.c
 	vcfutils.c
+	tabix.c
 	cram/cram_codecs.c
 	cram/cram_decode.c
 	cram/cram_encode.c
@@ -83,10 +84,6 @@ SET(BGZIP_SRC
     bgzip.c
 )
 
-SET(TABIX_SRC
-    tabix.c
-)
-
 SET(HTSFILE_SRC
     htsfile.c
 )
@@ -105,17 +102,6 @@ target_link_libraries(bgzip
     ${HTSLIBCORE_LIB}
 	${CMAKE_THREAD_LIBS_INIT}
 	${ZLIB_LIBRARY}
-	${TABIX_LIB}
-)
-
-add_executable(tabix
-	${TABIX_SRC}
-)
-
-target_link_libraries(tabix
-    ${HTSLIBCORE_LIB}
-	${CMAKE_THREAD_LIBS_INIT}
-	${ZLIB_LIBRARY}
 )
 
 add_executable(htsfile
@@ -129,14 +115,7 @@ target_link_libraries(htsfile
 )
 
 add_dependencies(htsfile ${HTSLIB_EXTERNAL_PROJECT})
-add_dependencies(tabix ${HTSLIB_EXTERNAL_PROJECT})
 add_dependencies(bgzip ${HTSLIB_EXTERNAL_PROJECT})
-
-
-add_custom_command(TARGET tabix POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-	"${CMAKE_BINARY_DIR}/core/tabix"
-	${CMAKE_BINARY_DIR})
 
 add_custom_command(TARGET bgzip POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
